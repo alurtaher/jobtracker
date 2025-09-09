@@ -2,20 +2,23 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const jobApplicationController = require('../controllers/applicationController');
+const upload = require('../utils/uploadToS3')
+
+router.use(authMiddleware)
 
 // Create a new job application
-router.post('/', authMiddleware, jobApplicationController.createJobApplication);
+router.post('/', upload, jobApplicationController.createJobApplication);
 
 // Get all job applications for logged-in user
-router.get('/', authMiddleware, jobApplicationController.getJobApplications);
+router.get('/',  jobApplicationController.getJobApplications);
 
 // Get a specific job application by ID
-router.get('/:id', authMiddleware, jobApplicationController.getJobApplicationById);
+router.get('/:id',  jobApplicationController.getJobApplicationById);
 
 // Update a job application by ID
-router.put('/:id', authMiddleware, jobApplicationController.updateJobApplication);
+router.put('/:id',upload, jobApplicationController.updateJobApplication);
 
 // Delete a job application by ID
-router.delete('/:id', authMiddleware, jobApplicationController.deleteJobApplication);
+router.delete('/:id',  jobApplicationController.deleteJobApplication);
 
 module.exports = router;

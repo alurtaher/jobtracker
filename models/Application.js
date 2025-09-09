@@ -1,5 +1,3 @@
-// models/JobApplication.js
-
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const User = require('./User'); // your user model

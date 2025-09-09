@@ -7,6 +7,9 @@ const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const jobAppRoutes = require('./routes/applicationRoutes');
 const reminderRoutes = require('./routes/reminderRoutes');
+const companyRoutes = require('./routes/companyRoutes');
+const jobListingRoutes = require('./routes/jobListingRoutes');
+
 const reminderNotificationService = require('./services/reminderNotificationService');
 reminderNotificationService();
 
@@ -30,9 +33,11 @@ app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/job-applications', jobAppRoutes);
 app.use('/api/reminders', reminderRoutes);
+app.use('/api/companies', companyRoutes);
+app.use('/api/job-listings', jobListingRoutes);
 
 const sequelize = require('./config/db');
-sequelize.sync({force:false}).then(() => {
+sequelize.sync({alter:true}).then(() => {
   console.log('Database synced');
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

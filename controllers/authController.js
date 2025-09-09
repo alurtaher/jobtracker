@@ -4,9 +4,9 @@ const User = require('../models/User');
 require('dotenv').config();
 
 const register = async (req, res) => {
-  const { email, password, name ,careerGoals} = req.body;
-
+  
   try {
+    const { email, password, name ,careerGoals} = req.body;
     // Check if user already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
@@ -29,7 +29,8 @@ const register = async (req, res) => {
       id: user.id,
       email: user.email,
       name: user.name,
-      careerGoals: user.careerGoals
+      careerGoals: user.careerGoals,
+      success:true
     });
   } catch (error) {
     console.error('Registration error:', error);
@@ -51,14 +52,14 @@ const login = async (req, res) => {
     // Check password
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Wrong email or password' });
     }
 
     // Generate JWT token
     const token = jwt.sign(
       { id: user.id, email: user.email, name: user.name },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      // { expiresIn: '1h' }
     );
 
     // Send response
@@ -69,7 +70,8 @@ const login = async (req, res) => {
         email: user.email,
         name: user.name,
         careerGoals: user.careerGoals
-      }
+      },
+      success:true
     });
   } catch (error) {
     console.error('Login error:', error);

@@ -80,7 +80,7 @@ Use the Swagger docs to explore endpoints, request/response details, and try out
 
 ## Tech Stack
 
-**Client:** `HTML` `CSS` `JAVASCRIPT` `BootStrap` `AXIOS`
+**Client:** `HTML` `CSS` `JAVASCRIPT` `BOOTSTRAP` `AXIOS`
 
 **Server:** `NODE JS` `EXPRESS JS`  `MYSQL`  `SEQUELIZE` `JWT` `AWS` 
 

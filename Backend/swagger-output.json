@@ -5,13 +5,33 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "http://13.201.26.101",
+  "host": "13.201.26.101",
   "basePath": "/",
   "schemes": [
     "http"
   ],
   "paths": {
-     "/api/auth/register": {
+    "/register": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
       "post": {
         "description": "",
         "parameters": [
@@ -76,6 +96,76 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/users/profile": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/users/updateprofile": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "careerGoals": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -258,7 +348,7 @@
         }
       }
     },
-    "/api/job-listings/": {
+    "/api/reminders/": {
       "get": {
         "description": "",
         "parameters": [
@@ -294,19 +384,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
+                "jobApplicationId": {
                   "example": "any"
                 },
-                "description": {
+                "reminderDate": {
                   "example": "any"
                 },
-                "applyUrl": {
-                  "example": "any"
-                },
-                "status": {
-                  "example": "any"
-                },
-                "companyId": {
+                "message": {
                   "example": "any"
                 }
               }
@@ -329,37 +413,7 @@
         }
       }
     },
-    "/api/job-listings/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
+    "/api/reminders/{id}": {
       "put": {
         "description": "",
         "parameters": [
@@ -581,7 +635,7 @@
         }
       }
     },
-    "/api/reminders/": {
+    "/api/job-listings/": {
       "get": {
         "description": "",
         "parameters": [
@@ -617,13 +671,19 @@
             "schema": {
               "type": "object",
               "properties": {
-                "jobApplicationId": {
+                "title": {
                   "example": "any"
                 },
-                "reminderDate": {
+                "description": {
                   "example": "any"
                 },
-                "message": {
+                "applyUrl": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                },
+                "companyId": {
                   "example": "any"
                 }
               }
@@ -646,7 +706,37 @@
         }
       }
     },
-    "/api/reminders/{id}": {
+    "/api/job-listings/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "put": {
         "description": "",
         "parameters": [
@@ -695,76 +785,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/api/users/profile": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/api/users/updateprofile": {
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "careerGoals": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "401": {
             "description": "Unauthorized"

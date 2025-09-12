@@ -1,192 +1,119 @@
-Here’s a comprehensive checklist of your Job Application Tracker backend APIs, indicating what you have already created and what remains pending. For each endpoint, I’ve included the expected JSON input or output structure.
 
-✅ COMPLETED APIs
-1. User Authentication and Profiles
-Registration
+# Jobby 
 
-POST /api/auth/register
-
-json
-{ "email": "user@email.com", "password": "password", "name": "User Name" }
-Login
-
-POST /api/auth/login
-
-json
-{ "email": "user@email.com", "password": "password" }
-Response: { "token": "JWT_TOKEN" }
-
-Profile Management
-
-GET /api/profile
-
-PUT /api/profile
-
-json
-{ "name": "User Name", "careerGoals": "Your goals..." }
+Jobby is a full-stack job application tracker that helps users manage their job search process, track applications, set reminders, and visualize progress using charts and statistics.
 
 
-2. Job Application Logging
-Create Application
+## Features
 
-POST /api/applications
+- Track job applications with status updates (Applied, Interviewed, Selected, etc.).
 
-json
-{
-  "companyId": 1,
-  "jobTitle": "Backend Developer",
-  "applicationDate": "2025-08-28",
-  "status": "applied",
-  "notes": "First round cleared"
-}
-Attachments via multipart/form-data (resume, cover letter).
+- Visual progress dashboard with charts for application stages and stats.
 
-Get List
+- CRUD operations for jobs and companies via REST API.
 
-GET /api/applications
+- User authentication and profile management.
 
-View/Edit/Delete Specific Application
+- Upload and manage resumes and documents with AWS S3 integration.
 
-GET /api/applications/:id
+- Set reminders and receive notifications for important deadlines.
 
-PUT /api/applications/:id
+- Clean and intuitive frontend navigation for seamless user experience.
 
-json
-{
-  "status": "interviewed",
-  "notes": "Technical interview done"
-}
-DELETE /api/applications/:id
+## Installation
+
+Install my-project with github
+
+```bash
+  git clone https://github.com/alurtaher/jobtracker.git
+
+```
+
+```bash
+  cd jobtracker
+```
+
+```bash
+  npm install
+```
 
 
+    
+## Environment Variables
 
-3. Reminder System
-Create Reminder
+To run this project, you will need to add the following environment variables to your .env file
 
-POST /api/reminders
+`JWT_SECRET`
 
-json
-{
-  "applicationId": 1,
-  "reminderDate": "2025-08-30",
-  "message": "Follow up with recruiter"
-}
-Get All Reminders
+`DB_NAME`
 
-GET /api/reminders
+`DB_USER`
 
-Delete Reminder
+`DB_PASSWORD`
 
-DELETE /api/reminders/:id
+`DB_HOST`
+
+`AWS_ACCESS_KEY_ID`
+
+`AWS_SECRET_ACCESS_KEY`
+
+`BUCKET_NAME`
+
+`SENDINBLUE_API_KEY`
+
+`PORT`
+## Run the jobby using 
+
+```bash
+  node server.js
+```
 
 
 
-4. Company Information Management
-Create Company
+## API Documentation
 
-POST /api/companies
+The full API reference and interactive testing are available via Swagger UI:
 
-json
-{
-  "name": "Acme Corp",
-  "industry": "Tech",
-  "size": "200-500",
-  "contactInfo": "hr@acme.com",
-  "notes": "Great Glassdoor reviews"
-}
-Get User's Companies
+- [Swagger Documentation](http://localhost:5000/api-docs)
 
-GET /api/companies
+Use the Swagger docs to explore endpoints, request/response details, and try out the API directly.
 
-Update/Delete
+## Tech Stack
 
-PUT /api/companies/:id
+**Client:** `HTML` `CSS` `JAVASCRIPT` `BootStrap` `AXIOS`
 
-DELETE /api/companies/:id
+**Server:** `NODE JS` `EXPRESS JS`  `MYSQL`  `SEQUELIZE` `JWT` `AWS` 
 
-Save Job Listings
+## Screenshots
 
-POST /api/job-listings
+![App Screenshot](https://github.com/alurtaher/photo/blob/master/register.png?raw=true)
 
-json
-{
-  "companyId": 1,
-  "title": "Software Engineer",
-  "description": "Fullstack role",
-  "applyUrl": "https://example.com/job",
-  "status": "saved"
-}
-GET /api/job-listings?companyId=1
+![App Screenshot](https://github.com/alurtaher/photo/blob/master/login.png?raw=true)
+
+![App Screenshot](https://github.com/alurtaher/photo/blob/master/dashboard.png?raw=true)
+
+![App Screenshot](https://github.com/alurtaher/photo/blob/master/jobapplications.png?raw=true)
+
+![App Screenshot](https://github.com/alurtaher/photo/blob/master/joblistings.png?raw=true)
+
+![App Screenshot](https://github.com/alurtaher/photo/blob/master/companies.png?raw=true)
+
+![App Screenshot](https://github.com/alurtaher/photo/blob/master/notifications.png?raw=true)
+
+![App Screenshot](https://github.com/alurtaher/photo/blob/master/profile.png?raw=true)
+
+## 🔗 Author
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alur-taher-basha-857937233/)
 
 
 
 
-5. Application Progress Visualization
-Dashboard Summary
+## Other Common Github Profile Sections
+👩‍💻 I'm currently working on a Backend project
 
-GET /api/dashboard/summary
-
-json
-{
-  "totalApplications": 10,
-  "statuses": {
-    "bookmarked": 2,
-    "applying": 2,
-    "applied": 4,
-    "interviewing": 1,
-    "negotiating": 1,
-    "accepted": 0
-  },
-  "offers": 0,
-  "accepted": 0
-}
-Applications Over Time
-
-GET /api/dashboard/application-trends
-
-json
-{
-  "labels": ["June", "July", "August"],
-  "applications": [2, 4, 3]
-}
-🟡 PENDING or TO VERIFY/ENHANCE
+🧠 I'm exploring backend technologies in depth
 
 
 
-6. Search and Filtering
-Search Applications
 
-GET /api/applications/search?query=developer
-
-By job title, company, or notes.
-
-Filter by status/date/other
-
-GET /api/applications?status=applied&from=2025-08-01&to=2025-09-01
-
-Expected Response:
-
-json
-[
-  {
-    "id": 4,
-    "jobTitle": "Fullstack Developer",
-    "company": "Acme Corp",
-    "status": "applied",
-    "applicationDate": "2025-08-20",
-    ...
-  }
-]
-
-
-
-7. Notes on Applications
-Add/Update Note
-
-Included as the "notes" field in application creation/update,
-or as a dedicated:
-
-POST /api/applications/:id/note
-
-json
-{ "note": "Had technical interview, waiting for result." }

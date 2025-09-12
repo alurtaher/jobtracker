@@ -96,7 +96,7 @@ const reminderNotificationJob = () => {
           <p>This is a reminder for your job application:</p>
           <p><strong>${reminder.message || "No message provided"}</strong></p>
           <p>Scheduled for: ${reminder.reminderDate.toLocaleString()}</p>
-          <p>Regards,<br/>Job Tracker Team</p>`;
+          <p>Regards,<br/>Jobby Team</p>`;
 
         await sendEmail(user.email, subject, htmlContent);
 

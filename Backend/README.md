@@ -74,7 +74,7 @@ To run this project, you will need to add the following environment variables to
 
 The full API reference and interactive testing are available via Swagger UI:
 
-- [Swagger Documentation](http://localhost:5000/api-docs)
+- [Swagger Documentation](http://13.201.26.101/api-docs/)
 
 Use the Swagger docs to explore endpoints, request/response details, and try out the API directly.
 

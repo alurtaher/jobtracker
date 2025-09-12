@@ -5,7 +5,7 @@ const doc = {
     title: 'My API',
     description: 'Description'
   },
-  host: '13.201.26.101'
+  host: 'localhost:5000'
 };
 
 const outputFile = './swagger-output.json';
